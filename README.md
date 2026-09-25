@@ -27,6 +27,17 @@ plus Plotly and vanilla JS (no jQuery) on the frontend.
 
 Data lives in `./data/leaflogger.db` (SQLite, created on first start).
 
+## Changing the port
+
+The app listens on 8084 by default. To change it, edit the `ports`
+mapping in `docker-compose.yml` — the left side is the host port:
+
+    ports:
+      - "9090:8000"
+
+then `docker compose up -d` again. Leave the right side (8000, the port
+inside the container) unless you also change the Dockerfile `CMD`.
+
 ## Tests
 
 Stdlib `unittest` only, no test dependencies:

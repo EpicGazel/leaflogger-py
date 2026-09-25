@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+data/
+*.db
+.pytest_cache/
+.env
+.DS_Store
+# Real LeafSpy exports: VIN + location history. Local testing only,
+# never commit. Ship anonymized fixtures via tools/anonymize_csv.py.
+Log_*.csv

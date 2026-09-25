@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>leaflogger-py</title>
+<link rel="stylesheet" href="/static/styles.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+</head>
+<body>
+<header>
+  <h1>leaflogger-py</h1>
+  <form id="uploadForm">
+    <input type="file" id="uploadFile" name="file" accept=".csv,.txt" required>
+    <button type="submit">Upload LeafSpy CSV</button>
+    <span id="uploadStatus"></span>
+  </form>
+  <label>Units
+    <select id="unitsSelect">
+      <option value="US" selected>US (mi, ft, &deg;F)</option>
+      <option value="SI">SI (km, m, &deg;C)</option>
+    </select>
+  </label>
+  <button id="darkToggle" type="button" title="Toggle dark mode">&#x1F319;</button>
+</header>
+
+<section id="tripbar">
+  <label>Trip:
+    <select id="tripSelect"><option value="">----------</option></select>
+  </label>
+  <button id="deleteTrip" type="button" title="Delete the selected trip">Delete this trip</button>
+  <div id="summary"></div>
+</section>
+
+<section id="rangebar">
+  <div id="dualbar">
+    <div id="dualtrack"><div id="dualfill"></div></div>
+    <input type="range" id="sliderStart" min="0" max="1000" value="0" title="Range start (From)">
+    <input type="range" id="sliderEnd" min="0" max="1000" value="1000" title="Range end (To)">
+  </div>
+  <button id="resetRange" type="button">Reset to full trip</button>
+  <label>Show points <input type="number" id="fromBox" min="1" step="1"></label>
+  <label>to <input type="number" id="toBox" min="1" step="1"></label>
+  <span id="rangeLabel"></span>
+</section>
+
+<main>
+  <div id="socChart" class="panel"></div>
+  <div id="thermalChart" class="panel"></div>
+  <div class="panel" id="mapPanel">
+    <div id="map"></div>
+    <button id="expandMap" type="button" title="Fullscreen map">&#x26F6;</button>
+    <div id="mapLegend" title="Segment colour: efficiency relative to the points shown">efficient &#8592; <span class="grad"></span> &#8594; inefficient</div>
+  </div>
+</main>
+
+<section id="tableWrap">
+  <table id="dataTable">
+    <thead><tr>
+      <th>#</th><th>Date/Time</th><th>Lat</th><th>Lon</th>
+      <th>Elev (GPS)</th><th>Speed</th>
+      <th>SOC</th><th>GIDS</th><th>SOH</th><th id="miHead">Mi</th><th id="effHead">mi/kWh</th><th></th>
+    </tr></thead>
+    <tbody></tbody>
+  </table>
+</section>
+
+<section id="dangerzone">
+  <button id="deleteAll" type="button">Delete ALL records</button>
+</section>
+
+<script src="/static/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+services:
+  api:
+    build: .
+    container_name: leaflogger-py
+    ports:
+      - "8084:8000"  # LAN-only
+    volumes:
+      - ./data:/data
+    environment:
+      - LEAFLOGGER_DB=/data/leaflogger.db
+      - LEAFLOGGER_TRIP_GAP_MIN=10
+    restart: unless-stopped

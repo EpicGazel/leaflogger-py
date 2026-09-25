@@ -1,0 +1,81 @@
+:root {
+  --bg: #ffffff; --fg: #111111;
+  --th-bg: #eeeeee; --cell-border: #dddddd; --wrap-border: #cccccc;
+  --highlight: #fff3a0; --muted: #444444;
+  --legend-bg: rgba(255,255,255,0.9);
+}
+body.dark {
+  --bg: #121212; --fg: #e0e0e0;
+  --th-bg: #2a2a2a; --cell-border: #444444; --wrap-border: #555555;
+  --highlight: #5a4d00; --muted: #bbbbbb;
+  --legend-bg: rgba(30,30,30,0.9);
+  color-scheme: dark;
+}
+body { font-family: sans-serif; margin: 0 20px; background: var(--bg); color: var(--fg); }
+header { display: flex; align-items: center; gap: 24px; }
+header h1 { font-size: 1.4em; }
+#uploadStatus { margin-left: 8px; font-size: 0.9em; }
+#tripbar { display: flex; gap: 20px; align-items: center; margin: 8px 0; }
+#summary { font-size: 0.95em; }
+#rangebar { display: flex; gap: 20px; margin: 8px 0; align-items: center; }
+/* One shared bar with two overlapping thumbs, like the original app:
+   both inputs are stacked transparently; only the thumbs take input. */
+#dualbar { position: relative; flex: 1 1 0; height: 24px; min-width: 200px; }
+#dualtrack { position: absolute; left: 0; right: 0; top: 9px; height: 6px;
+             background: var(--cell-border); border-radius: 3px; }
+#dualfill { position: absolute; top: 0; height: 100%; background: #3388ff;
+            border-radius: 3px; }
+#dualbar input[type="range"] { position: absolute; left: 0; top: 0; width: 100%;
+  margin: 0; background: transparent; pointer-events: none;
+  -webkit-appearance: none; appearance: none; }
+#dualbar input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none;
+  appearance: none; pointer-events: auto; width: 16px; height: 16px;
+  border-radius: 50%; cursor: grab; }
+#dualbar input[type="range"]::-moz-range-thumb { pointer-events: auto;
+  width: 12px; height: 12px; border-radius: 50%; cursor: grab; }
+/* Distinct thumbs so the stacked handles stay identifiable: blue = From. */
+#sliderStart::-webkit-slider-thumb { background: #3388ff; border: 2px solid #1a5fb4; }
+#sliderStart::-moz-range-thumb { background: #3388ff; border: 2px solid #1a5fb4; }
+/* Orange = To. */
+#sliderEnd::-webkit-slider-thumb { background: #ff8800; border: 2px solid #b25f00; }
+#sliderEnd::-moz-range-thumb { background: #ff8800; border: 2px solid #b25f00; }
+#sliderStart { z-index: 3; }
+#rangeLabel { font-size: 0.9em; color: var(--muted); }
+main { display: flex; gap: 8px; }
+.panel { flex: 1 1 0; height: 400px; min-width: 0; }
+#mapPanel { position: relative; }
+#mapPanel:fullscreen { height: 100%; background: #fff; }
+#map { height: 100%; }
+#expandMap { position: absolute; right: 8px; top: 8px; z-index: 500;
+             font-size: 1.1em; cursor: pointer; }
+#mapLegend { position: absolute; left: 8px; bottom: 8px; z-index: 500;
+             background: var(--legend-bg); color: var(--fg); border: 1px solid #999;
+             padding: 2px 8px; font-size: 0.8em; }
+#mapLegend .grad { display: inline-block; width: 80px; height: 8px;
+                   background: linear-gradient(to right, #00c000, #ffff00, #ff0000); }
+#tableWrap { max-height: 400px; overflow-y: auto; margin-top: 8px;
+             border: 1px solid var(--wrap-border); }
+#dataTable { border-collapse: collapse; width: 100%; font-size: 0.9em; }
+#dataTable th { position: sticky; top: 0; background: var(--th-bg); }
+#dataTable td, #dataTable th { border: 1px solid var(--cell-border); padding: 2px 6px;
+                               white-space: nowrap; }
+#dataTable tbody tr { scroll-margin-top: 30px; } /* keep clear of sticky header */
+#dataTable tr.highlight td { background: var(--highlight); }
+.ignoreBtn { cursor: pointer; border: none; background: none;
+             font-size: 1.1em; }
+.ignoreBtn:hover { transform: rotate(360deg); transition: transform 0.5s; }
+#dangerzone { margin: 16px 0 32px; }
+#deleteAll { background: #b3261e; color: #fff; border: none; padding: 6px 14px;
+             font-size: 0.95em; cursor: pointer; }
+
+/* Marker labels, ported from the PHP app's chart1css.css .labels */
+.labels {
+  color: red;
+  background-color: white;
+  font-family: "Lucida Grande", "Arial", sans-serif;
+  font-size: 8px;
+  text-align: center;
+  width: 20px;
+  border: 2px solid black;
+  white-space: nowrap;
+}

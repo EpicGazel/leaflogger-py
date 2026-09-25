@@ -20,10 +20,18 @@ plus Plotly and vanilla JS (no jQuery) on the frontend.
 - Dark mode
 - US/SI units toggle
 
-## Run
+## Setup
 
-    docker compose up --build
-    # open http://<host>:8084/
+Prerequisites: [git](https://git-scm.com/downloads) and
+[Docker](https://docs.docker.com/get-docker/) (with the Compose plugin —
+standard in Docker Desktop and in `docker-compose-plugin` packages).
+
+    git clone https://github.com/EpicGazel/leaflogger-py.git
+    cd leaflogger-py
+    docker compose up --build -d
+
+Then open http://localhost:8084/ (or `http://<host>:8084/` from another
+machine on your LAN) and upload a LeafSpy CSV to get started.
 
 Data lives in `./data/leaflogger.db` (SQLite, created on first start).
 
